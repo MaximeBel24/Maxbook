@@ -32,7 +32,12 @@ class Maxbook extends StatelessWidget {
     var size = MediaQuery.of(context).size;
     return Scaffold(
       appBar: maxAppBar(),
-      body: maxBody()
+      body: SingleChildScrollView(
+        child: maxBody(),
+      ),
+      // body: maxBody(),
+
+
     );
   }
 }
@@ -71,6 +76,9 @@ Column maxBody() {
       aboutMeHome(),
       aboutMeJob(),
       aboutMeLove(),
+      const Divider(),
+      titleSection(text: "Amis"),
+      friendsSection(),
       const Divider()
       
 
@@ -85,7 +93,7 @@ Row buttonRow() {
     children: [
       Container(
         height: 50,
-        width: 350,
+        width: 300,
         alignment: AlignmentDirectional.center,
         decoration: const BoxDecoration(
             color: Colors.teal,
@@ -208,8 +216,6 @@ Row aboutMeLove() {
   );
 }
 
-
-
 Text aboutMeText({required String text}) {
   return Text(
       text,
@@ -217,5 +223,32 @@ Text aboutMeText({required String text}) {
         fontSize: 16,
         fontWeight: FontWeight.w500
       ),
+  );
+}
+
+Row friendsSection(){
+  return Row(
+    mainAxisAlignment: MainAxisAlignment.spaceAround,
+    children: [
+      friend(image: "images/geralt.jpg" ,name: "Geralt de Riv"),
+      friend(image: "images/tarnished.jpg" ,name: "Le sans éclat"),
+      friend(image: "images/link.jpg" ,name: "Link"),
+    ],
+  );
+}
+
+Column friend({required String image, required String name}) {
+  return Column(
+    children: [
+      ClipRRect(
+        borderRadius: BorderRadius.circular(20),
+        child: Image.asset(
+            image,
+          height: 150,
+          width: 125,
+        ),
+      ),
+      Text(name)
+    ],
   );
 }
