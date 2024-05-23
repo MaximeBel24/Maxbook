@@ -1,3 +1,4 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
 void main() {
@@ -40,6 +41,7 @@ AppBar maxAppBar() {
   return AppBar(
     title: const Text(
         "Maxbook",
+      textAlign: TextAlign.center,
       style: TextStyle(
         color: Colors.white
       ),
@@ -50,15 +52,26 @@ AppBar maxAppBar() {
 
 Column maxBody() {
   return Column(
+    crossAxisAlignment: CrossAxisAlignment.start,
     children: [
       maxStack(),
-      myName(),
+      Row(
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: [
+          myName(),
+        ],
+      ),
       citation(),
       Padding(
           padding: const EdgeInsets.only(top:20),
           child: buttonRow(),
       ),
       const Divider(),
+      titleSection(text: "A propos de moi"),
+      aboutMeHome(),
+      aboutMeJob(),
+      aboutMeLove(),
+      const Divider()
       
 
 
@@ -105,7 +118,7 @@ Row buttonRow() {
 
 Text citation() {
   return const Text(
-    "Si l'herbe est plus verte dans le jardin de ton voisin, laisse-le s'emmerder à la tondre.",
+    "Si l'herbe est plus verte dans le jardin de ton voisin, laisse-le s'emmerder à la tondre",
     textAlign: TextAlign.center,
     style: TextStyle(
       color: Colors.grey,
@@ -145,5 +158,64 @@ Stack maxStack() {
         ),
       )
     ],
+  );
+}
+
+Padding titleSection({required String text}) {
+  return Padding(
+      padding: const EdgeInsets.all(5),
+      child: Text(
+        text,
+        textAlign: TextAlign.start,
+        style: const TextStyle(
+            fontSize: 18,
+            fontWeight: FontWeight.w800
+        ),
+      )
+  );
+}
+
+Row aboutMeHome() {
+  return Row(
+    children: [
+      const Icon(
+          Icons.home,
+      ),
+      aboutMeText(text: "Noiseau, France"),
+    ],
+  );
+}
+
+Row aboutMeJob() {
+  return Row(
+    children: [
+      const Icon(
+          Icons.work,
+      ),
+      aboutMeText(text: "Apprenti développeur chez Amedia Solutions"),
+    ],
+  );
+}
+
+Row aboutMeLove() {
+  return Row(
+    children: [
+      const Icon(
+          Icons.favorite,
+      ),
+      aboutMeText(text: "Célibataire"),
+    ],
+  );
+}
+
+
+
+Text aboutMeText({required String text}) {
+  return Text(
+      text,
+      style: const TextStyle(
+        fontSize: 16,
+        fontWeight: FontWeight.w500
+      ),
   );
 }
