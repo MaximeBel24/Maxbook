@@ -1,6 +1,8 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:maxbook/main_title_text.dart';
 import 'package:maxbook/post.dart';
+import 'package:maxbook/section_title.dart';
 
 void main() {
   runApp(const MyApp());
@@ -72,7 +74,9 @@ class Maxbook extends StatelessWidget {
         Row(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            myName(),
+            const Spacer(),
+            MainTitleText(data: "Maxime Belin"),
+            const Spacer(),
           ],
         ),
         citation(),
@@ -81,15 +85,15 @@ class Maxbook extends StatelessWidget {
           child: buttonRow(),
         ),
         const Divider(),
-        titleSection(text: "A propos de moi :"),
+        SectionTitle("A propos de moi :"),
         aboutMeHome(),
         aboutMeJob(),
         aboutMeLove(),
         const Divider(),
-        titleSection(text: "Amis :"),
+        SectionTitle("Amis : "),
         friendsSection(),
         const Divider(),
-        titleSection(text: "Mes publications :"),
+        SectionTitle("Mes Posts :"),
         allPosts(),
       ],
     );
@@ -143,17 +147,6 @@ class Maxbook extends StatelessWidget {
     );
   }
 
-  Text myName() {
-    return const Text(
-      "Maxime Belin",
-      style: TextStyle(
-          fontSize: 25,
-          fontStyle: FontStyle.italic,
-          fontWeight: FontWeight.w700
-      ),
-    );
-  }
-
   Stack maxStack() {
     return Stack(
       alignment: Alignment.topCenter,
@@ -181,19 +174,19 @@ class Maxbook extends StatelessWidget {
     );
   }
 
-  Padding titleSection({required String text}) {
-    return Padding(
-        padding: const EdgeInsets.all(5),
-        child: Text(
-          text,
-          textAlign: TextAlign.start,
-          style: const TextStyle(
-              fontSize: 18,
-              fontWeight: FontWeight.w800
-          ),
-        )
-    );
-  }
+  // Padding titleSection({required String text}) {
+  //   return Padding(
+  //       padding: const EdgeInsets.all(5),
+  //       child: Text(
+  //         text,
+  //         textAlign: TextAlign.start,
+  //         style: const TextStyle(
+  //             fontSize: 18,
+  //             fontWeight: FontWeight.w800
+  //         ),
+  //       )
+  //   );
+  // }
 
   Row aboutMeHome() {
     return Row(
@@ -267,9 +260,9 @@ class Maxbook extends StatelessWidget {
 
   Column allPosts() {
     List<Widget> postToAdd = [];
-    posts.forEach((element) {
+    for (var element in posts) {
       postToAdd.add(publication(post: element));
-    });
+    }
     return Column(children: postToAdd,);
   }
 
